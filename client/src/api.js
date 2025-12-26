@@ -22,3 +22,8 @@ export async function bookAppointment({ patientId, doctorId, type, startISO, end
     });
     return res.json();
 }
+
+export async function healthcheck() {
+    const res = await fetch(`${API}/health`);
+    return res.json();
+}
