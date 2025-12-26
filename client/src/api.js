@@ -24,6 +24,10 @@ export async function bookAppointment({ patientId, doctorId, type, startISO, end
 }
 
 export async function healthcheck() {
-    const res = await fetch(`${API}/health`);
+    const res = await fetch(`${API}/health`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+    });
     return res.json();
 }
