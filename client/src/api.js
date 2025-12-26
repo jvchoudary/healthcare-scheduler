@@ -1,7 +1,7 @@
 const API = 'http://localhost:4000/api';
 
 export async function getSuggestions({ patientId, doctorId, start, end }) {
-    const res = await fetch(`${API}/suggestions`, {
+    const res = await fetch(`${API}/slots`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

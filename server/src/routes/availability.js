@@ -14,7 +14,7 @@ const SuggestSchema = z.object({
     durationMin: z.number().optional()
 });
 
-router.post('/suggestions', async (req, res) => {
+router.post('/', async (req, res) => {
     const parsed = SuggestSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json(parsed.error);
     const { patientId, doctorId, dateRange, durationMin } = parsed.data;

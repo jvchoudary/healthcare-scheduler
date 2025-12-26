@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', availabilityRoutes);
+app.use('/api/slots', availabilityRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
 app.post('/api/health', (req, res) => res.json({ ok: true }));
