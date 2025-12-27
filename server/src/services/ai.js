@@ -2,7 +2,7 @@ import axios from 'axios';
 import { config } from '../config.js';
 
 export async function getAISlotSuggestions(payload) {
-    // console.log(payload);
+    console.log(payload);
     // return [];
     const response = await axios.post(config.claude_apiUrl, {
         model: config.claude_model,

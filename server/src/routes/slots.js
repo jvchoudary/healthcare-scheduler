@@ -36,7 +36,7 @@ router.post('/slots', async (req, res) => {
             if (['_id', '__v', 'createdAt', 'updatedAt', 'name', 'role', 'specialty', 'phone', 'email'].includes(key)) return undefined
             return value;
         }),
-        "window": {"start": "2025-12-26", "end": "2026-01-10"},
+        "window": dateRange,
         "maxSuggestions": 10,
         "clinicHolidays": ["2025-12-31"],
         objective: "Return ranked appointment slots (ISO RFC3339) with start, end, scores and reasons. Penalize conflicts, honor buffers, respect both time zones."
@@ -55,7 +55,8 @@ router.post('/slots', async (req, res) => {
 
     const filtered = ranked.filter(c => {
         return !appts.some(a => {
-            // console.log(new Date(c.start) + ' < ' + a.end + ' && ' + new Date(c.end) + ' > ' + a.start);
+            console.log(new Date(c.start) < a.end && new Date(c.end) > a.start);
+            console.log(new Date(c.start) + ' < ' + a.end + ' && ' + new Date(c.end) + ' > ' + a.start);
             return (new Date(c.start) < a.end && new Date(c.end) > a.start) // overlap
         });
     });
