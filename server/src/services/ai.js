@@ -21,9 +21,9 @@ export async function getAISlotSuggestions(payload) {
         }
     });
 
-    // console.log(response.data)
     const text = response.data?.content?.[0]?.text ?? '{}';
     const parsed = safeJson(text);
+    console.log(parsed)
     return (parsed || []).sort((a, b) => b.score - a.score);
 }
 
