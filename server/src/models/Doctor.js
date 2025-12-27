@@ -5,8 +5,13 @@ const TimeRangeSchema = new mongoose.Schema({
     end: String
 }, { _id: false });
 
+const DateTimeRangeSchema = new mongoose.Schema({
+    start: Date,
+    end: Date
+}, { _id: false });
+
 const AvailabilityRuleSchema = new mongoose.Schema({
-    day: Number,
+    dayOfWeek: Number,
     timeRanges: [TimeRangeSchema]
 }, { _id: false });
 
@@ -20,10 +25,8 @@ const DoctorSchema = new mongoose.Schema({
     bufferMin: { type: Number, default: 10 },
     maxDailyAppointments: { type: Number, default: 16 },
     availabilityRules: [AvailabilityRuleSchema],
-    preferences: {
-        avoidBackToBack: { type: Boolean, default: true },
-        prefersMornings: { type: Boolean, default: true }
-    }
+    blackoutDates: [String],
+    busyBlocks: [DateTimeRangeSchema]
 }, { timestamps: true });
 
 export default mongoose.model('Doctor', DoctorSchema);

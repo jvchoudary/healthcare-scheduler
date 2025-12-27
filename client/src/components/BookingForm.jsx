@@ -3,8 +3,8 @@ import SuggestedSlots from './SuggestedSlots.jsx';
 
 export default function BookingForm() {
     // Seed IDs assumed from backend seed
-    const [patientId] = React.useState('694c46848d633779d85b65ee'); // placeholder
-    const [doctorId] = React.useState('694c46848d633779d85b65ec');   // placeholder
+    const [patientId] = React.useState('694e8122fdea49de3671a02a'); // placeholder
+    const [doctorId] = React.useState('694e8122fdea49de3671a027');   // placeholder
     const [start, setStart] = React.useState(new Date().toISOString());
     const [end, setEnd] = React.useState(new Date(Date.now() + 7*24*60*60*1000).toISOString());
 

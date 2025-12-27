@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { config } from './config.js';
-import availabilityRoutes from './routes/availability.js';
+import slotsRoutes from './routes/slots.js';
 import appointmentRoutes from './routes/appointments.js';
 import Doctor from './models/Doctor.js';
 import User from './models/User.js';
@@ -11,8 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/slots', availabilityRoutes);
-app.use('/api/appointments', appointmentRoutes);
+app.use('/api', slotsRoutes);
+app.use('/api', appointmentRoutes);
 
 app.post('/api/health', (req, res) => res.json({ ok: true }));
 
@@ -21,27 +21,35 @@ async function seed() {
     const existingPatients = await User.countDocuments();
     if (!existingDoctors) {
         await Doctor.create({
-            name: 'Dr. Asha Kumar',
+            name: 'Dr. Radhika',
             specialty: 'General Medicine',
-            email: 'asha@example.com',
-            phone: '+911234567890',
-            appointmentDurationMin: 30,
+            email: 'radhika.kode829@gmail.com',
+            phone: '+918553578177',
+            appointmentDurationMin: 50,
             bufferMin: 10,
             availabilityRules: [
-                { day: 1, timeRanges: [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '17:00' }] },
-                { day: 2, timeRanges: [{ start: '09:00', end: '12:00' }] },
-                { day: 4, timeRanges: [{ start: '10:00', end: '16:00' }] }
+                { dayOfWeek: 1, timeRanges: [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '17:00' }] },
+                { dayOfWeek: 2, timeRanges: [{ start: '09:00', end: '12:00' }] },
+                { dayOfWeek: 4, timeRanges: [{ start: '10:00', end: '16:00' }] }
             ],
-            preferences: { avoidBackToBack: true, prefersMornings: true }
+            blackoutDates: ["2026-01-01"],
+            busyBlocks: [
+                {"start": "2025-12-27T10:00:00+05:30", "end": "2025-12-27T11:00:00+05:30"}
+            ]
         });
     }
     if (!existingPatients) {
         await User.create({
             role: 'patient',
-            name: 'Ravi Singh',
-            email: 'ravi@example.com',
-            phone: '+919876543210',
-            preferences: { days: [1, 2, 4], timeRanges: [{ start: '09:00', end: '12:00' }] }
+            name: 'Sunny',
+            email: 'sriharimannam7@gmail.com',
+            phone: '+916281512171',
+            availabilityRules: [
+                { dayOfWeek: 1, timeRanges: [{ start: '08:00', end: '19:00' }] },
+                { dayOfWeek: 3, timeRanges: [{ start: '08:00', end: '19:00' }] },
+                { dayOfWeek: 5, timeRanges: [{ start: '08:00', end: '19:00' }] }
+            ],
+            leadTimeMinHours: 24
         });
     }
 }

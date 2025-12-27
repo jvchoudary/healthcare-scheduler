@@ -1,9 +1,13 @@
 import mongoose from 'mongoose';
 
-const PreferencesSchema = new mongoose.Schema({
-    days: [Number], // 0-6
-    timeRanges: [{ start: String, end: String }],
-    notes: String
+const TimeRangeSchema = new mongoose.Schema({
+    start: String,
+    end: String
+}, { _id: false });
+
+const AvailabilityRuleSchema = new mongoose.Schema({
+    dayOfWeek: Number,
+    timeRanges: [TimeRangeSchema]
 }, { _id: false });
 
 const UserSchema = new mongoose.Schema({
@@ -12,7 +16,8 @@ const UserSchema = new mongoose.Schema({
     email: String,
     phone: String,
     timezone: { type: String, default: 'Asia/Kolkata' },
-    preferences: PreferencesSchema
+    availabilityRules: [AvailabilityRuleSchema],
+    leadTimeMinHours: String
 }, { timestamps: true });
 
 export default mongoose.model('User', UserSchema);

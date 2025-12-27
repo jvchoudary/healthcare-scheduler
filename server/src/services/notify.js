@@ -8,7 +8,12 @@ export async function sendSMS(to, body) {
         console.log('[SMS MOCK]', { to, body });
         return { status: 'mocked' };
     }
-    return client.messages.create({ to, from: config.twilioFrom, body });
+    try {
+        return client.messages.create({ to, from: config.twilioFrom, body });
+    } catch (e) {
+        console.log(`SMS failed to $to`)
+        return { status: 'failed'};
+    }
 }
 
 export async function sendConfirmation(appointment, patient, doctor) {
