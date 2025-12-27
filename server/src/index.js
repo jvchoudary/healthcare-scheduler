@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/api', slotsRoutes);
 app.use('/api', appointmentRoutes);
 
-app.post('/api/health', (req, res) => res.json({ ok: true }));
+app.get('/api/health', (_, res) => res.json({ ok: true }));
 
 async function seed() {
     const existingDoctors = await Doctor.countDocuments();
