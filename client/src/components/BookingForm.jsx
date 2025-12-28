@@ -25,7 +25,7 @@ export default function BookingForm() {
                        onChange={e => setEnd(new Date(e.target.value).toISOString().slice(0,10))}/>
             </label>
 
-            <p style={{ color: '#666' }}>Showing suggestions for Dr. Asha Kumar & Ravi Singh (seed data).</p>
+            {/*<p style={{ color: '#666' }}>Showing suggestions for Dr. Asha Kumar & Ravi Singh (seed data).</p>*/}
             <SuggestedSlots patientId={patientId} doctorId={doctorId} range={{ start, end }} />
         </div>
     );
