@@ -5,7 +5,20 @@ env:
   SOME_VAR: "my value" # The environment variable in the caller
 
 jobs:
+  EnvSetup:
+    name: Setup Dynamic Environment Variables
+    runs-on: <your-awesome-runner>
+    outputs:
+      build-and-verify: ${{ steps.set-output-defaults.outputs.build-and-verify }}
+    steps:
+      - name: set outputs with default values
+        id: set-output-defaults
+        run: |    
+          # If workflow_dispatch, use inputs (left), if other trigger, use default env (right)
+          echo "::set-output name=build-and-verify::${{ github.event.inputs.build-and-verify || 'true' }}"        
   call-reusable:
+    needs: [EnvSetup]
     uses: ./.github/workflows/reusable-workflow.yml # Or {owner}/{repo}/...@{ref}
     with:
-      my_variable: ${{ env.SOME_VAR }} # Pass the env variable using the env context
+      #my_variable: ${{ env.SOME_VAR }} # Pass the env variable using the env context
+      my_variable: ${{needs.EnvSetup.outputs.build-and-verify}}
