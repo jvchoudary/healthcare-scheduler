@@ -2,7 +2,7 @@
 on: [push]
 
 env:
-  SOME_VAR: "my value" # The environment variable in the caller
+  SOME_VAR: "Global"
 
 jobs:
   EnvSetup:
@@ -17,8 +17,9 @@ jobs:
           # If workflow_dispatch, use inputs (left), if other trigger, use default env (right)
           echo "::set-output name=build-and-verify::${{ github.event.inputs.build-and-verify || 'true' }}"        
   call-reusable:
-    needs: [EnvSetup]
-    uses: ./.github/workflows/reusable-workflow.yml # Or {owner}/{repo}/...@{ref}
+    #needs: [EnvSetup]
+    uses: ./.github/workflows/reusable-workflow.yml
     with:
-      #my_variable: ${{ env.SOME_VAR }} # Pass the env variable using the env context
-      my_variable: ${{needs.EnvSetup.outputs.build-and-verify}}
+      my_variable: "Hardcoded"
+      #my_variable: ${{ env.SOME_VAR }}
+      #my_variable: ${{needs.EnvSetup.outputs.build-and-verify}}
