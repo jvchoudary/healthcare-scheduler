@@ -2,13 +2,18 @@
 on:
   workflow_call:
     inputs:
-      my_variable:
+      space:
         required: true
         type: string
 
 jobs:
   use-variable:
     runs-on: ubuntu-latest
+    env:
+      config: |
+        p11-dmz: 
+          job_name: 'Deploy P11 DMZ'
+    name: ${{ env.config['p11-dmz'].job_name }}
     steps:
     - name: Use the passed variable
-      run: echo "The API URL is ${{ inputs.my_variable }}"
+      run: echo "The API URL is true"
