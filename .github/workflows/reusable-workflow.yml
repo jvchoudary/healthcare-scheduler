@@ -11,3 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
+      run: echo "The API URL is ${{ inputs.my_variable }}"
