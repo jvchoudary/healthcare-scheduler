@@ -1,0 +1,14 @@
+# .github/workflows/reusable-workflow.yml
+on:
+  workflow_call:
+    inputs:
+      my_variable:
+        required: true
+        type: string
+
+jobs:
+  use-variable:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Use the passed variable
+      run: echo "The value is ${{ inputs.my_variable }}"
