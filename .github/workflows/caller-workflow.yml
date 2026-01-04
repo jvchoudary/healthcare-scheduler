@@ -7,7 +7,7 @@ env:
 jobs:
   EnvSetup:
     name: Setup Dynamic Environment Variables
-    runs-on: <your-awesome-runner>
+    runs-on: ubuntu-latest
     outputs:
       build-and-verify: ${{ steps.set-output-defaults.outputs.build-and-verify }}
     steps:
