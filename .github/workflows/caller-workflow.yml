@@ -1,0 +1,11 @@
+# .github/workflows/caller-workflow.yml
+on: [push]
+
+env:
+  SOME_VAR: "my value" # The environment variable in the caller
+
+jobs:
+  call-reusable:
+    uses: ./.github/workflows/reusable-workflow.yml # Or {owner}/{repo}/...@{ref}
+    with:
+      my_variable: ${{ env.SOME_VAR }} # Pass the env variable using the env context
