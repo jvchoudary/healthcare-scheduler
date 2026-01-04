@@ -9,11 +9,7 @@ on:
 jobs:
   use-variable:
     runs-on: ubuntu-latest
-    env:
-      config: |
-        p11-dmz: 
-          job_name: 'Deploy P11 DMZ'
-    name: ${{ env.config['p11-dmz'].job_name }}
+    name: ${{ vars.config['p11-dmz'].job_name }}
     steps:
     - name: Use the passed variable
       run: echo "The API URL is true"
