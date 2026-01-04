@@ -8,7 +8,7 @@ on:
 
 jobs:
   use-variable:
-    name: ${{ fromjson(vars.config)['p11-dmz'].job_name }}
+    name: ${{ fromjson(vars.CONFIG)['p11-dmz'] }}
     runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
