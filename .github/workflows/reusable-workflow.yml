@@ -8,8 +8,8 @@ on:
 
 jobs:
   use-variable:
-    runs-on: ubuntu-latest
     name: ${{ vars.config['p11-dmz'].job_name }}
+    runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
       run: echo "The API URL is true"
