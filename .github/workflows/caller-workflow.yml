@@ -17,9 +17,9 @@ jobs:
           # If workflow_dispatch, use inputs (left), if other trigger, use default env (right)
           echo "::set-output name=build-and-verify::${{ github.event.inputs.build-and-verify || 'true' }}"        
   call-reusable:
-    #needs: [EnvSetup]
+    needs: [EnvSetup]
     uses: ./.github/workflows/reusable-workflow.yml
     with:
-      my_variable: "Hardcoded"
+      #my_variable: "Hardcoded"
       #my_variable: ${{ env.SOME_VAR }}
-      #my_variable: ${{needs.EnvSetup.outputs.build-and-verify}}
+      my_variable: ${{needs.EnvSetup.outputs.build-and-verify}}
