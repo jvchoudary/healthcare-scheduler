@@ -1,5 +1,12 @@
 on: [push]
 
+env:
+  CONFIG: |
+    p11: 
+      JOB_NAME: DEPLOY P11
+    p11-dmz:
+      JOB_NAME: DEPLOY P11 DMZ
+
 jobs:
 #  Deploy-SIT:
 #    uses: ./.github/workflows/deploy.yml
@@ -9,6 +16,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       space: p11-dmz
+      config: ${{ env.CONFIG }}
 #  Deploy-PROD-S11:
 #    uses: ./.github/workflows/deploy.yml
 #    with:
