@@ -13,9 +13,9 @@ env:
 
 jobs:
   Deploy:
-    name: ${{ fromjson(CONFIG)[inputs.space]['job_name'] }}
+    name: ${{ fromjson(env.CONFIG)[inputs.space]['job_name'] }}
     runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
       run: |
-        echo "${{ fromjson(CONFIG)[inputs.space]['job_name'] }}"
+        echo "${{ fromjson(env.CONFIG)[inputs.space]['job_name'] }}"
