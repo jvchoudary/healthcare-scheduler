@@ -4,14 +4,14 @@ on:
       space:
         required: true
         type: string
+env:
+  CONFIG: |
+    p11: 
+      JOB_NAME: DEPLOY P11
+    p11-dmz:
+      JOB_NAME: DEPLOY P11 DMZ
 
 jobs:
-  env:
-    CONFIG: |
-      p11: 
-        JOB_NAME: DEPLOY P11
-      p11-dmz:
-        JOB_NAME: DEPLOY P11 DMZ
   Deploy:
     name: ${{ fromjson(CONFIG)[inputs.space]['job_name'] }}
     runs-on: ubuntu-latest
