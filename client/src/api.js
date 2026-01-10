@@ -1,4 +1,5 @@
-const API = 'https://healthcare-scheduler-t57i.onrender.com/api';
+// const API = 'https://healthcare-scheduler-t57i.onrender.com/api';
+const API = 'http://localhost:4000/api';
 
 export async function getSuggestions({ patientId, doctorId, start, end }) {
     const res = await fetch(`${API}/slots`, {

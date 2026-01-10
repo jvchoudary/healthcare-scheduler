@@ -1,4 +1,3 @@
-# .github/workflows/reusable-workflow.yml
 on:
   workflow_call:
     inputs:
@@ -7,9 +6,9 @@ on:
         type: string
 
 jobs:
-  use-variable:
-    name: ${{ fromjson(vars.CONFIG)['p11-dmz'].job_name }}
+  Deploy:
+    name: ${{ fromjson(vars.CONFIG)[space]['job_name'] }}
     runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
-      run: echo "The API URL is true"
+      run: echo ${{ fromjson(vars.CONFIG) }}"

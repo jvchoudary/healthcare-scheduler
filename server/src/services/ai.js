@@ -1,31 +1,53 @@
-import axios from 'axios';
 import { config } from '../config.js';
+import Anthropic from "@anthropic-ai/sdk";
+
+// Load API key from environment variable
+const client = new Anthropic({
+    apiKey: config.claude_apiKey,
+});
 
 export async function getAISlotSuggestions(payload) {
     console.log(payload);
     // return [];
-    const response = await axios.post(config.claude_apiUrl, {
+    const response = await client.messages.create({
         model: config.claude_model,
-        max_tokens: 2048,
-        temperature: 1,
-        system: 'You optimize healthcare appointment slots with constraints and send response as json array.',
+        max_tokens: 2000,
         messages: [
-            { role: 'user', content: JSON.stringify(payload) }
-        ]
-    }, {
-        headers: {
-            'anthropic-version': '2023-06-01',
-            'x-api-key': config.claude_apiKey,
-            'content-type': 'application/json',
-            'accept': 'application/json'
-        }
+            { role: "user", content: JSON.stringify(payload) }
+        ],
     });
 
-    const text = response.data?.content?.[0]?.text ?? '{}';
-    const parsed = safeJson(text);
+    console.log(response.content[0].text);
+    const parsed = safeJson(response.content[0].text);
     console.log(parsed)
     return (parsed || []).sort((a, b) => b.score - a.score);
 }
+
+// export async function getAISlotSuggestions(payload) {
+//     console.log(payload);
+//     // return [];
+//     const response = await axios.post(config.claude_apiUrl, {
+//         model: config.claude_model,
+//         max_tokens: 2048,
+//         temperature: 1,
+//         system: 'You optimize healthcare appointment slots with constraints and send response as json array.',
+//         messages: [
+//             { role: 'user', content: JSON.stringify(payload) }
+//         ]
+//     }, {
+//         headers: {
+//             'anthropic-version': '2023-06-01',
+//             'x-api-key': config.claude_apiKey,
+//             'content-type': 'application/json',
+//             'accept': 'application/json'
+//         }
+//     });
+//
+//     const text = response.data?.content?.[0]?.text ?? '{}';
+//     const parsed = safeJson(text);
+//     console.log(parsed)
+//     return (parsed || []).sort((a, b) => b.score - a.score);
+// }
 
 function safeJson(s) {
     const jsonMatch = s.match(/```json([\s\S]*?)```/);

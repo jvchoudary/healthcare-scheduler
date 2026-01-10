@@ -1,8 +1,0 @@
-# .github/workflows/caller-workflow.yml
-on: [push]
-
-jobs:
-  call-reusable:
-    uses: ./.github/workflows/reusable-workflow.yml
-    with:
-      space: pll-dmz
