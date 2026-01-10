@@ -4,14 +4,12 @@ on:
       space:
         required: true
         type: string
-      config:
-        required: true
-        type: string
+
 jobs:
   Deploy:
-    name: ${{ fromjson(vars.config)[inputs.space]['job_name'] }}
+    name: ${{ fromjson(vars.CONFIG)[inputs.space]['job_name'] }}
     runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
       run: |
-        echo "${{ fromjson(vars.config)[inputs.space]['job_name'] }}"
+        echo "${{ fromjson(vars.CONFIG)[inputs.space]['job_name'] }}"
