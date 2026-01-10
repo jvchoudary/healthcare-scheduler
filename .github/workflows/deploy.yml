@@ -6,10 +6,16 @@ on:
         type: string
 
 jobs:
+  env:
+    CONFIG: |
+      p11: 
+        JOB_NAME: DEPLOY P11
+      p11-dmz:
+        JOB_NAME: DEPLOY P11 DMZ
   Deploy:
-    name: ${{ fromjson(vars.CONFIG)[inputs.space]['job_name'] }}
+    name: ${{ fromjson(CONFIG)[inputs.space]['job_name'] }}
     runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
       run: |
-        echo "${{ fromjson(vars.CONFIG)['p11-dmz'] }}"
+        echo "${{ fromjson(CONFIG)[inputs.space]['job_name'] }}"
