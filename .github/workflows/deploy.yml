@@ -12,5 +12,5 @@ jobs:
     steps:
     - name: Use the passed variable
       run: |
-        echo "echo ${{ fromjson(vars.CONFIG) }}"
-        echo "echo Hi "
+        echo "${{ fromjson(vars.CONFIG)[inputs.space] }}"
+        echo "Hi "
