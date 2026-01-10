@@ -14,5 +14,4 @@ jobs:
       run: |
         echo "${{ fromjson(vars.CONFIG)}}"
         echo "${{ inputs.space }}"
-        echo "${{ fromjson(vars.CONFIG)[inputs.space] }}"
-        echo "Hi "
+        echo "${{ fromjson(vars.CONFIG)['p11-dmz'] }}"
