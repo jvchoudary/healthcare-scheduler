@@ -11,4 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Use the passed variable
-      run: echo ${{ fromjson(vars.CONFIG) }}"
+      run: |
+        echo "echo ${{ fromjson(vars.CONFIG) }}"
+        echo "echo Hi "
