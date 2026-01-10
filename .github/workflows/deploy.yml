@@ -12,4 +12,4 @@ jobs:
     steps:
     - name: Use the passed variable
       run: |
-        echo "${{ fromjson(vars.CONFIG).p11-dmz }}"
+        echo "${{ fromjson(vars.CONFIG)['p11-dmz'] }}"
